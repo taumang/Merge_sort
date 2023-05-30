@@ -27,18 +27,17 @@
     document.getElementById('submitButton').addEventListener('click', async () => {
   const userInput = document.getElementById('userInput').value;
   const response = await fetch(`/user-input?input=${encodeURIComponent(userInput)}`);
-  //const models = await response.json();
+  const models = await response.json();
 
-  // Display the models in the "models" div
-  //const modelsDiv = document.getElementById('models');
-  // modelsDiv.innerHTML = ''; // Clear the previous content
-  // models.forEach(model => {
-  //   const modelElement = document.createElement('div');
-  //   modelElement.textContent = model;
-  //   modelsDiv.appendChild(modelElement);
-  // });
-console.log(await response.text());
-const models = await response.json();
+  const modelsDiv = document.getElementById('models');
+  modelsDiv.innerHTML = ''; // Clear the previous content
+
+  const ul = document.createElement('ul');
+  models.forEach(model => {
+    const li = document.createElement('li');
+    li.textContent = model;
+    ul.appendChild(li);
+  });
 });
 
   </script>
