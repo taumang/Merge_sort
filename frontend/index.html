@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Models List</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-4">Models List</h1>
+
+    <!-- User input textbox -->
+    <div class="mb-4">
+      <label for="userInput" class="text-lg font-medium">User Input:</label>
+      <input id="userInput" type="text" class="w-full px-4 py-2 mt-1 rounded border border-gray-300 focus:outline-none focus:border-indigo-500">
+      <button submit='post' id="submitButton" class="px-4 py-2 mt-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">Submit</button>
+    </div>
+
+    <div id="models" class="grid grid-cols-2 gap-4"></div>
+  </div>
+
+  <script>
+    // Fetch models from the server
+    document.getElementById('submitButton').addEventListener('click', async () => {
+  const userInput = document.getElementById('userInput').value;
+  const response = await fetch(`/user-input?input=${encodeURIComponent(userInput)}`);
+  //const models = await response.json();
+
+  // Display the models in the "models" div
+  //const modelsDiv = document.getElementById('models');
+  // modelsDiv.innerHTML = ''; // Clear the previous content
+  // models.forEach(model => {
+  //   const modelElement = document.createElement('div');
+  //   modelElement.textContent = model;
+  //   modelsDiv.appendChild(modelElement);
+  // });
+console.log(await response.text());
+const models = await response.json();
+});
+
+  </script>
+</body>
+
+</html>
